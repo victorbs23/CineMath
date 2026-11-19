@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CineMatch - Recomendador inteligente de filmes e séries baseado nas suas preferências.">
+  <title>CineMatch – Recomendador de Filmes e Séries</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════
+       HEADER
+       ════════════════════════════════════════════ -->
+  <header class="header" role="banner">
+    <div class="container header-inner">
+
+      <!-- Logo -->
+      <div class="logo" aria-label="CineMatch - Recomendador de Filmes e Séries">
+        <span class="logo-icone" aria-hidden="true">🎬</span>
+        <span>Cine<strong>Match</strong></span>
+      </div>
+
+      <!-- Estatísticas de Favoritos -->
+      <div class="stats-favs" aria-label="Estatísticas de favoritos">
+        <div class="stat-item">
+          <span aria-hidden="true">❤️</span>
+          <span>Favoritos:</span>
+          <span class="stat-valor" id="contador-favoritos" aria-live="polite">0</span>
+        </div>
+        <div class="stat-item">
+          <span aria-hidden="true">🏆</span>
+          <span>Top gênero:</span>
+          <span class="stat-valor" id="genero-top-favorito" aria-live="polite">—</span>
+        </div>
+      </div>
+
+      <!-- Botão Tema -->
+      <button class="btn-tema" id="btn-tema" aria-label="Alternar para modo claro">
+        ☀️ Light Mode
+      </button>
+
+      <!-- Barra de Busca -->
+      <nav class="busca-wrapper" role="search" aria-label="Busca rápida por título">
+        <span class="busca-icone" aria-hidden="true">🔍</span>
+        <label for="campo-busca" class="sr-only">Buscar filme ou série por título</label>
+        <input
+          type="search"
+          id="campo-busca"
+          placeholder="Buscar filme ou série..."
+          autocomplete="off"
+          aria-label="Buscar filme ou série por título"
+        >
+        <div class="busca-resultados oculto" id="busca-resultados" role="listbox" aria-label="Resultados da busca"></div>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════
+       MAIN
+       ════════════════════════════════════════════ -->
+  <main class="main" role="main">
+    <div class="container">
+
+      <!-- ──────────────────────────────────────
+           SEÇÃO: Cadastro de Preferências
+           ────────────────────────────────────── -->
+      <section class="secao-preferencias" aria-labelledby="titulo-preferencias">
+        <h2 class="titulo-secao" id="titulo-preferencias">
+          <span class="icone-secao" aria-hidden="true">🎯</span>
+          Suas Preferências
+        </h2>
+
+        <form id="form-preferencias" aria-label="Formulário de preferências para recomendação">
+          <div class="form-grid">
+
+            <!-- Gêneros -->
+            <fieldset class="form-grupo">
+              <legend>Gêneros Favoritos</legend>
+              <div class="checkbox-grupo" role="group" aria-label="Seleção de gêneros">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="gen-ficcao" name="genero" value="Ficção Científica">
+                  <label for="gen-ficcao">🚀 Ficção Científica</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="gen-acao" name="genero" value="Ação">
+                  <label for="gen-acao">💥 Ação</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="gen-drama" name="genero" value="Drama">
+                  <label for="gen-drama">🎭 Drama</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="gen-comedia" name="genero" value="Comédia">
+                  <label for="gen-comedia">😂 Comédia</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="gen-suspense" name="genero" value="Suspense">
+                  <label for="gen-suspense">🔍 Suspense</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="gen-animacao" name="genero" value="Animação">
+                  <label for="gen-animacao">✨ Animação</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="gen-terror" name="genero" value="Terror">
+                  <label for="gen-terror">👻 Terror</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Faixa Etária -->
+            <div class="form-grupo">
+              <label for="faixa-etaria">Classificação Indicativa</label>
+              <select id="faixa-etaria" name="faixaEtaria" class="form-select" aria-label="Selecione a faixa etária">
+                <option value="">Todas as idades</option>
+                <option value="Livre">Livre</option>
+                <option value="+10">+10 anos</option>
+                <option value="+12">+12 anos</option>
+                <option value="+14">+14 anos</option>
+                <option value="+16">+16 anos</option>
+                <option value="+18">+18 anos</option>
+              </select>
+            </div>
+
+            <!-- Tempo Disponível -->
+            <div class="form-grupo">
+              <label for="tempo">Tempo Disponível</label>
+              <select id="tempo" name="tempo" class="form-select" aria-label="Selecione o tempo disponível">
+                <option value="">Qualquer duração</option>
+                <option value="ate-1h30">⏱️ Até 1h30</option>
+                <option value="ate-2h">⏱️ Até 2h</option>
+                <option value="mais-2h">⏱️ Mais de 2h</option>
+                <option value="maratona">📺 Maratona de Série</option>
+              </select>
+            </div>
+
+            <!-- Humor Atual -->
+            <fieldset class="form-grupo">
+              <legend>Seu Humor Atual</legend>
+              <div class="checkbox-grupo" role="group" aria-label="Seleção de humor">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="humor-animado" name="humor" value="Animado">
+                  <label for="humor-animado">🎉 Animado</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="humor-reflexivo" name="humor" value="Reflexivo">
+                  <label for="humor-reflexivo">🤔 Reflexivo</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="humor-tenso" name="humor" value="Tenso/Adrenalina">
+                  <label for="humor-tenso">⚡ Tenso/Adrenalina</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="humor-relaxado" name="humor" value="Relaxado">
+                  <label for="humor-relaxado">😌 Relaxado</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="humor-emocionado" name="humor" value="Emocionado">
+                  <label for="humor-emocionado">🥺 Emocionado</label>
+                </div>
+              </div>
+            </fieldset>
+
+          </div>
+
+          <!-- Botões de Ação -->
+          <div class="form-acoes">
+            <button type="submit" class="btn btn-primario" aria-label="Gerar recomendações com base nas preferências">
+              🎬 Gerar Recomendações
+            </button>
+            <button type="button" class="btn btn-secundario" id="btn-limpar-filtros" aria-label="Limpar todos os filtros">
+              🧹 Limpar Filtros
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ──────────────────────────────────────
+           SEÇÃO: Resultados de Recomendação
+           ────────────────────────────────────── -->
+      <section class="secao-resultados" id="secao-resultados" aria-labelledby="titulo-resultados" aria-live="polite">
+        <h2 class="titulo-secao" id="titulo-resultados">
+          <span class="icone-secao" aria-hidden="true">🏆</span>
+          Recomendações para Você
+        </h2>
+
+        <div id="resultados-info" aria-live="polite"></div>
+
+        <div class="grid-cards" id="resultados-grid" role="list" aria-label="Cards de recomendações"></div>
+
+        <div id="extras-grid" aria-label="Sugestões adicionais"></div>
+      </section>
+
+      <!-- ──────────────────────────────────────
+           SEÇÃO: Favoritos & Histórico (Abas)
+           ────────────────────────────────────── -->
+      <section class="secao-abas" aria-labelledby="titulo-abas">
+        <h2 class="titulo-secao" id="titulo-abas">
+          <span class="icone-secao" aria-hidden="true">📋</span>
+          Sua Coleção
+        </h2>
+
+        <!-- Cabeçalho das Abas -->
+        <div class="abas-header" role="tablist" aria-label="Alternar entre favoritos e histórico">
+          <button class="aba-btn aba-ativa" data-aba="favoritos" role="tab" aria-selected="true" aria-controls="painel-favoritos">
+            ❤️ Meus Favoritos
+          </button>
+          <button class="aba-btn" data-aba="historico" role="tab" aria-selected="false" aria-controls="painel-historico">
+            📜 Histórico
+          </button>
+        </div>
+
+        <!-- Painel: Favoritos -->
+        <div class="aba-painel aba-painel-ativo" id="painel-favoritos" role="tabpanel" aria-labelledby="titulo-abas">
+          <div class="grid-cards" id="favoritos-grid" role="list" aria-label="Cards de filmes favoritos"></div>
+          <div class="mensagem-vazia" id="favoritos-vazio">
+            <span class="icone-vazio" aria-hidden="true">💔</span>
+            <p>Você ainda não favoritou nenhum título.</p>
+            <p>Clique no 🤍 nos cards para adicionar!</p>
+          </div>
+        </div>
+
+        <!-- Painel: Histórico -->
+        <div class="aba-painel" id="painel-historico" role="tabpanel" aria-labelledby="titulo-abas">
+          <div class="historico-acoes">
+            <button class="btn btn-perigo oculto" id="btn-limpar-historico" aria-label="Limpar todo o histórico">
+              🗑️ Limpar Histórico
+            </button>
+          </div>
+          <div id="historico-lista" aria-live="polite" aria-label="Lista do histórico de recomendações"></div>
+          <div class="mensagem-vazia" id="historico-vazio">
+            <span class="icone-vazio" aria-hidden="true">📭</span>
+            <p>Nenhuma recomendação gerada ainda.</p>
+            <p>Preencha suas preferências acima e clique em "Gerar Recomendações"!</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <p>
+        <span class="footer-destaque">CineMatch</span> — Recomendador Inteligente de Filmes e Séries
+      </p>
+      <p>Desenvolvido com ❤️ usando HTML5, CSS3 e JavaScript Vanilla</p>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════
+       TOAST CONTAINER
+       ════════════════════════════════════════════ -->
+  <aside class="toast-container" id="toast-container" aria-live="polite" aria-label="Notificações do sistema"></aside>
+
+  <!-- ════════════════════════════════════════════
+       SCRIPTS (ordem importa: dados → storage → app)
+       ════════════════════════════════════════════ -->
+  <script src="js/movies.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
+
