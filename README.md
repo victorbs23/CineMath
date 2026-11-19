@@ -8,14 +8,14 @@ Aplicação web desenvolvida em **arquitetura Web Vanilla** (HTML5, CSS3 e JavaS
 
 ##  Funcionalidades
 
-- ** Cadastro de Preferências:** Seleção combinada de gêneros favoritos, humor atual, tempo disponível (`Até 1h30`, `Até 2h`, `Mais de 2h`, `Maratona de Série`) e faixa etária (`Livre` a `+18`).
-- ** Algoritmo de Recomendação Ponderado:** Calcula um índice de compatibilidade multidimensional considerando gênero, humor, duração, faixa etária flexível e nota crítica, destacando as **3 melhores recomendações** e listando opções complementares.
-- ** Busca Instantânea com Debounce:** Campo de pesquisa rápida no cabeçalho com atraso controlado (`250ms`) e dropdown interativo para localizar obras pelo título.
-- ** Lista de Favoritos e Estatísticas:** Permite salvar e remover filmes ou séries com sincronização visual em toda a interface, atualizando automaticamente o contador de favoritos e o **Top Gênero** no cabeçalho.
-- ** Avaliação Pessoal por Estrelas:** Sistema interativo de 1 a 5 estrelas em cada card para registrar sua nota individual por obra.
-- ** Histórico de Recomendações:** Registro cronológico das consultas realizadas (data, horário e filtros aplicados), com prevenção de duplicatas consecutivas e opção para limpar o histórico.
-- ** Tema Claro e Escuro (Dark / Light Mode):** Alternância fluida entre o tema escuro cinematográfico e o tema claro de alto contraste, com feedback visual via notificações *Toast*.
-- ** Persistência Local (`LocalStorage`):** Mantém favoritos, histórico, últimas preferências, avaliações por estrelas e tema salvos no navegador mesmo após fechar a página.
+- **Cadastro de Preferências:** Seleção combinada de gêneros favoritos, humor atual, tempo disponível (`Até 1h30`, `Até 2h`, `Mais de 2h`, `Maratona de Série`) e faixa etária (`Livre` a `+18`).
+- **Algoritmo de Recomendação Ponderado:** Calcula um índice de compatibilidade multidimensional considerando gênero, humor, duração, faixa etária flexível e nota crítica, destacando as **3 melhores recomendações** e listando opções complementares.
+- **Busca Instantânea com Debounce:** Campo de pesquisa rápida no cabeçalho com atraso controlado (`250ms`) e dropdown interativo para localizar obras pelo título.
+- **Lista de Favoritos e Estatísticas:** Permite salvar e remover filmes ou séries com sincronização visual em toda a interface, atualizando automaticamente o contador de favoritos e o **Top Gênero** no cabeçalho.
+- **Avaliação Pessoal por Estrelas:** Sistema interativo de 1 a 5 estrelas em cada card para registrar sua nota individual por obra.
+- **Histórico de Recomendações:** Registro cronológico das consultas realizadas (data, horário e filtros aplicados), com prevenção de duplicatas consecutivas e opção para limpar o histórico.
+- **Tema Claro e Escuro (Dark / Light Mode):** Alternância fluida entre o tema escuro cinematográfico e o tema claro de alto contraste, com feedback visual via notificações *Toast*.
+- **Persistência Local (`LocalStorage`):** Mantém favoritos, histórico, últimas preferências, avaliações por estrelas e tema salvos no navegador mesmo após fechar a página.
 
 ---
 
